@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 using namespace std;
-// Prueba de conexión con GitHub
 
 int main()
 {
@@ -12,7 +11,7 @@ int main()
         cout << "\n--- MENU DE OPCIONES ---\n";
         cout << "1. Cargar archivo de datos\n";
         cout << "2. Mostrar videos por calificacion\n";
-        cout << "3. Mostrar episodios de una serie con calificacion\n";
+        cout << "3. Mostrar episodios de una serie con calificacion\n"; //Titulo del epidosodio
         cout << "4. Mostrar peliculas con cierta calificacion\n";
         cout << "5. Calificar un video\n";
         cout << "0. Salir\n";   // YA QUEDÓ
