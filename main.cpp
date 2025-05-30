@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 // Prueba de conexión con GitHub
 
@@ -13,7 +15,7 @@ int main()
         cout << "3. Mostrar episodios de una serie con calificacion\n";
         cout << "4. Mostrar peliculas con cierta calificacion\n";
         cout << "5. Calificar un video\n";
-        cout << "0. Salir\n";
+        cout << "0. Salir\n";   // YA QUEDÓ
         cout << "Ingrese una opcion: \n";
         cin >> opcion;
 
@@ -35,7 +37,7 @@ int main()
             break;
         case 0:
             cout << "Saliendo del programa.\n";
-            break;
+            exit(0);
         default:
             cout << "Opción invalida. Intente de nuevo.\n";
         }
