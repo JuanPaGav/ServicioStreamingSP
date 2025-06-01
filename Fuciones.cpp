@@ -5,9 +5,5 @@ cout << "4. Mostrar peliculas con cierta calificacion\n";
 cout << "5. Calificar un video\n"; */
 
 
-void mostrarEpisodios(Serie _serie){
-cout<<"hola"<<endl;
-}
-
 
 

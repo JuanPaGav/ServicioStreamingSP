@@ -42,15 +42,29 @@ float Serie::get_calificacion() {
 }
 
 void Serie::mostrar_info() {
-    cout << "Serie: " << get_nombre() << endl;
-    cout << "Temporadas: " << temporadas << endl;
+    cout << "Serie:" << get_nombre() << endl;
+    cout << "Temporadas: " << get_temporadas() << endl;
     cout << "Género: " << get_genero() << endl;
     cout << "Duración: " << get_duracion() << " minutos" << endl;
     cout << "Calificación promedio: " << get_calificacion() << endl;
     cout << "Episodios:\n";
 
     for (Episodio& ep : episodios) {
-        ep.mostrar_info();
+        ep.get_titulo();
         cout << "-----\n";
+    }
+}
+
+void Serie::mostrar_episodiosCalificacion(){
+    cout << "--------------------------" << get_nombre() << "--------------------------" << endl;
+    for (int i= 1; i <= get_temporadas(); i++){
+        cout<< "Temporada "<<i<<endl;
+        for (Episodio& ep : episodios) {
+            if (ep.get_temporada() == i){
+                cout << "  " << ep.get_titulo()
+                << " | Calificación: " << ep.get_calificacion() << endl;
+            }
+        }
+        cout << "\n";
     }
 }

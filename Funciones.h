@@ -14,6 +14,4 @@
 
 using namespace std;
 
-void mostrarEpisodios(Serie _serie);
-
 #endif //FUNCIONES_H
