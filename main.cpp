@@ -1,6 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Video.h"
+#include "Pelicula.h"
+#include "Serie.h"
+#include "Episodio.h"
+#include "Funciones.h"
 using namespace std;
 
 int main()
