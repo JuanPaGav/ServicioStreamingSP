@@ -6,14 +6,18 @@
 
 Episodio::Episodio() {}
 
-Episodio::Episodio(string _titulo, string _temporada, float _calificacion) {}
+Episodio::Episodio(string _titulo, int _temporada, float _calificacion){
+    titulo = _titulo;
+    temporada = _temporada;
+    calificacion = _calificacion;
+}
 
 string Episodio::get_titulo()
 {
     return titulo;
 }
 
-string Episodio::get_temporada()
+int Episodio::get_temporada()
 {
     return temporada;
 }
@@ -28,7 +32,7 @@ void Episodio::set_titulo(string _titulo)
     titulo = _titulo;
 }
 
-void Episodio::set_temporada(string _temporada)
+void Episodio::set_temporada(int _temporada)
 {
     temporada = _temporada;
 }
@@ -40,7 +44,7 @@ void Episodio::set_calificacion(float _calificacion)
 
 void Episodio::mostrar_info()
 {
-        cout << "Episodio: " << titulo << endl;
-        cout << "Temporada: " << temporada << endl;
-        cout << "Calificación: " << calificacion << endl;
+        cout << "Episodio: " << get_titulo() << endl;
+        cout << "Temporada: " << get_temporada() << endl;
+        cout << "Calificación: " << get_calificacion() << endl;
 }

@@ -21,6 +21,7 @@ public:
     void agregar_episodio(const Episodio& episodio);
     float get_calificacion() override;
     void mostrar_info() override;
+    void mostrar_episodiosCalificacion();
 };
 
 #endif // SERIE_H
