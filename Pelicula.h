@@ -1,11 +1,7 @@
-//
-// Created by jpgav on 27/05/2025.
-//
-
 #ifndef PELICULA_H
 #define PELICULA_H
-#include "Video.h"
 
+#include "Video.h"
 
 class Pelicula : public Video {
 private:
@@ -18,6 +14,4 @@ public:
     void mostrar_info() override;
 };
 
-
-
-#endif //PELICULA_H
+#endif // PELICULA_H

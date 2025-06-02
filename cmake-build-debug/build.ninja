@@ -79,8 +79,8 @@ build CMakeFiles/ServicioStreamingSP.dir/Episodio.cpp.obj: CXX_COMPILER__Servici
   OBJECT_DIR = CMakeFiles\ServicioStreamingSP.dir
   OBJECT_FILE_DIR = CMakeFiles\ServicioStreamingSP.dir
 
-build CMakeFiles/ServicioStreamingSP.dir/Fuciones.cpp.obj: CXX_COMPILER__ServicioStreamingSP_unscanned_Debug C$:/Users/jpgav/OneDrive/Documentos/2do$ Semestre/Programación$ Orienteada$ a$ Objetos/ServicioStreamingSP/Fuciones.cpp || cmake_object_order_depends_target_ServicioStreamingSP
-  DEP_FILE = CMakeFiles\ServicioStreamingSP.dir\Fuciones.cpp.obj.d
+build CMakeFiles/ServicioStreamingSP.dir/Funciones.cpp.obj: CXX_COMPILER__ServicioStreamingSP_unscanned_Debug C$:/Users/jpgav/OneDrive/Documentos/2do$ Semestre/Programación$ Orienteada$ a$ Objetos/ServicioStreamingSP/Funciones.cpp || cmake_object_order_depends_target_ServicioStreamingSP
+  DEP_FILE = CMakeFiles\ServicioStreamingSP.dir\Funciones.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\ServicioStreamingSP.dir
   OBJECT_FILE_DIR = CMakeFiles\ServicioStreamingSP.dir
@@ -93,7 +93,7 @@ build CMakeFiles/ServicioStreamingSP.dir/Fuciones.cpp.obj: CXX_COMPILER__Servici
 #############################################
 # Link the executable ServicioStreamingSP.exe
 
-build ServicioStreamingSP.exe: CXX_EXECUTABLE_LINKER__ServicioStreamingSP_Debug CMakeFiles/ServicioStreamingSP.dir/main.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Video.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Serie.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Pelicula.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Episodio.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Fuciones.cpp.obj
+build ServicioStreamingSP.exe: CXX_EXECUTABLE_LINKER__ServicioStreamingSP_Debug CMakeFiles/ServicioStreamingSP.dir/main.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Video.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Serie.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Pelicula.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Episodio.cpp.obj CMakeFiles/ServicioStreamingSP.dir/Funciones.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ServicioStreamingSP.dir

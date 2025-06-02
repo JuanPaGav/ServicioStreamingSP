@@ -12,4 +12,5 @@ add_executable(ServicioStreamingSP main.cpp
         Pelicula.h
         Episodio.cpp
         Episodio.h
-        Fuciones.cpp)
+        Funciones.cpp
+)

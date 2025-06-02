@@ -1,13 +1,9 @@
-//
-// Created by jpgav on 27/05/2025.
-//
-
 #ifndef EPISODIO_H
 #define EPISODIO_H
+
 #include <iostream>
 #include <string>
 using namespace std;
-
 
 class Episodio {
 private:
@@ -25,6 +21,4 @@ public:
     void mostrar_info();
 };
 
-
-
-#endif //EPISODIO_H
+#endif // EPISODIO_H

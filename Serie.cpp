@@ -44,10 +44,11 @@ float Serie::get_calificacion() {
 void Serie::mostrar_info() {
     cout << "Serie: " << get_nombre() << endl;
     cout << "Temporadas: " << temporadas << endl;
-    cout << "Género: " << get_genero() << endl;
-    cout << "Duración: " << get_duracion() << " minutos" << endl;
-    cout << "Calificación promedio: " << get_calificacion() << endl;
+    cout << "Genero: " << get_genero() << endl;
+    cout << "Duracion: " << get_duracion() << " minutos" << endl;
+    cout << "Calificacion promedio: " << get_calificacion() << endl;
     cout << "Episodios:\n";
+    cout << "\n" << endl;
 
     for (Episodio& ep : episodios) {
         ep.mostrar_info();
