@@ -55,3 +55,17 @@ void Serie::mostrar_info() {
         cout << "-----\n";
     }
 }
+
+void Serie::mostrar_episodiosCalificacion(){
+    cout << "--------------------------" << get_nombre() << "--------------------------" << endl;
+    for (int i= 1; i <= get_temporadas(); i++){
+        cout<< "Temporada "<<i<<endl;
+        for (Episodio& ep : episodios) {
+            if (ep.get_temporada() == i){
+                cout << "  " << ep.get_titulo()
+                << " | Calificación: " << ep.get_calificacion() << endl;
+            }
+        }
+        cout << "\n";
+    }
+}

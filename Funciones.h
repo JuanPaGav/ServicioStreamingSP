@@ -13,5 +13,8 @@
 #include <iostream>
 
 using namespace std;
+extern vector<Video*> todosLosVideos;
+vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo);
+void mostrarTodosLosVideos();
 
 #endif //FUNCIONES_H

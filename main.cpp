@@ -4,12 +4,10 @@
 #include "Video.h"
 #include "Pelicula.h"
 #include "Serie.h"
+#include "Funciones.h"
 #include "Episodio.h"
 using namespace std;
 
-extern vector<Video*> todosLosVideos;
-vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo);
-void mostrarTodosLosVideos();
 
 int main()
 {
