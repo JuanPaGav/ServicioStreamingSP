@@ -74,6 +74,67 @@ void mostrarTodosLosVideos()
     }
 }
 
-//void def mostrarEpisodios():
+void calificarVideo(string video_calificar){
+    bool encontrado = false;
+
+    for (Video* v : todosLosVideos) {
+        if (v->get_titulo() == video_calificar) {
+            float calificacion;
+            cout << "Ingresa la calificación del 1-10:" << endl;
+            cin >> calificacion;
+            v->set_calificacion(calificacion);
+            cout << "Se ha actualizado la calificación." << endl;
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        cout << "No tenemos ese título en nuestro catálogo. ¿Quieres agregarlo? (Sí/No)" << endl;
+        string decide_agregar;
+        cin >> decide_agregar;
+
+        if (decide_agregar == "No" || decide_agregar == "no") {
+            cout << "Regresando al menú..." << endl;
+        } else {
+            // Pregunta si es película o serie para crear un nuevo objeto
+            cout << "¿Es una Película o una Serie? (p/s): ";
+            char tipo;
+            cin >> tipo;
+
+            // Capturar atributos comunes
+            int id, duracion;
+            string titulo, genero;
+            float calificacion;
+
+            cout << "Título: ";
+            cin.ignore(); // importante para limpiar el salto de línea
+            getline(cin, titulo);
+
+            cout << "ID: ";
+            cin >> id;
+            cout << "Duración: ";
+            cin >> duracion;
+            cin.ignore();
+
+            cout << "Género: ";
+            getline(cin, genero);
+
+            cout << "Calificación inicial: ";
+            cin >> calificacion;
+
+            if (tipo == 'p') {
+                todosLosVideos.push_back(new Pelicula(2024, id, duracion, titulo, genero, calificacion));
+            } else if (tipo == 's') {
+                int temporadas;
+                cout << "Número de temporadas: ";
+                cin >> temporadas;
+                todosLosVideos.push_back(new Serie(temporadas, id, duracion, titulo, genero, calificacion));
+            }
+
+            cout << "Se ha agregado el video al catálogo." << endl;
+        }
+    }
+}
 
 

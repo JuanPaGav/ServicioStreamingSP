@@ -13,13 +13,12 @@ private:
     vector<Episodio> episodios;
 public:
     Serie();
-    Serie(int _temporadas, int _id, int _duracion, string _nombre, string _genero, float _calificacion);
+    Serie(int _temporadas, int _id, int _duracion, string _titulo, string _genero, float _calificacion);
     void set_temporadas(int _temporadas);
     int get_temporadas();
     void set_episodios(vector<Episodio> _episodios);
     vector<Episodio> get_episodios();
     void agregar_episodio(const Episodio& episodio);
-    float get_calificacion() override;
     void mostrar_info() override;
     void mostrar_episodiosCalificacion();
 };

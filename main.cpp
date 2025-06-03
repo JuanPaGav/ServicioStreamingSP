@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Video.h"
 #include "Pelicula.h"
 #include "Serie.h"
@@ -46,11 +47,16 @@ int main()
             break;
 
         case 4:
-            cout << "Mostrando peliculas...\n";
+            float calificacion;
+            cout << "Ingrese la calificación a buscar (por ejemplo 4.0): ";
+            cin >> calificacion;
+            // mostrarCalificacionPeliculas(peliculas, calificacion);
             break;
 
         case 5:
-            cout << "Ingrese titulo y calificación...\n";
+            cout << "¿Qué video quieres calificar?" << endl;
+            cin.ignore();
+            getline(cin, video_calificar);
             break;
 
         case 0:
