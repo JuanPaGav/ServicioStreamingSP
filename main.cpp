@@ -16,12 +16,12 @@ int main()
 
     while (opcion != 0) {
         cout << "\n--- MENU DE OPCIONES ---\n";
-        cout << "1. Cargar archivo de datos\n";
-        cout << "2. Mostrar videos por calificacion\n";
-        cout << "3. Mostrar episodios de una serie con calificacion\n";
-        cout << "4. Mostrar peliculas con cierta calificacion\n";
+        cout << "1. Cargar archivo de datos\n"; //  Listo
+        cout << "2. Mostrar videos\n"; //  Checar con la miss
+        cout << "3. Mostrar episodios de una serie con calificacion\n"; //  Mayra
+        cout << "4. Mostrar peliculas con cierta calificacion\n";   // Miguel
         cout << "5. Calificar un video\n";
-        cout << "0. Salir\n";
+        cout << "0. Salir\n";   //  Listo
         cout << "Ingrese una opcion: \n";
         cin >> opcion;
 
@@ -31,10 +31,12 @@ int main()
             cout << "Cargando archivo desde '" << nombreArchivo << "'...\n";
             leerVideosDesdeArchivos(nombreArchivo);
             cout << "Se cargaron " << todosLosVideos.size() << " videos.\n";
+            cout << "\n" << endl;
             mostrarTodosLosVideos();
             break;
         case 2:
-            cout << "Mostrando videos filtrados...\n";
+            cout << "Buscando contenido...\n";
+            mostrarTodosLosVideos();
             break;
 
         case 3:
