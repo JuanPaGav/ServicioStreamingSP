@@ -1,0 +1,24 @@
+Pelicula
+id = 1
+nombre = Batman
+duracion = 150
+genero = accion
+calificacion = 8.9
+anio = 2022
+
+Serie
+id = 2
+nombre = Dark
+duracion = 300
+genero = suspenso
+calificacion = 9.4
+anio = 2017
+temporadas = 3
+
+Pelicula
+id = 3
+nombre = Crods
+duracion = 180
+genero = fantasia
+calificacion = 10.0
+anio = 2014
