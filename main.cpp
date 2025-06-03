@@ -32,7 +32,7 @@ int main()
             leerVideosDesdeArchivos(nombreArchivo);
             cout << "Se cargaron " << todosLosVideos.size() << " videos.\n";
             cout << "\n" << endl;
-            mostrarTodosLosVideos();
+            //mostrarTodosLosVideos();
             break;
         case 2:
             cout << "Buscando contenido...\n";
