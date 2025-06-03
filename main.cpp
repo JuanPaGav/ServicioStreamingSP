@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
     int opcion = -1;
-    string nombreArchivo;
+    string nombreArchivo, video_calificar;
 
     while (opcion != 0) {
         cout << "\n--- MENU DE OPCIONES ---\n";
@@ -41,6 +41,8 @@ int main()
 
         case 3:
             cout << "Mostrando episodios de una serie...\n";
+            cout << "¿Que serie quieres ver?" << endl;
+            // mostrar_episodiosCalificacion();
             break;
 
         case 4:
