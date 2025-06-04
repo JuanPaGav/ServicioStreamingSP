@@ -46,5 +46,5 @@ void Episodio::mostrar_info()
 {
         cout << "Episodio: " << get_titulo() << endl;
         cout << "Temporada: " << get_temporada() << endl;
-        cout << "Calificación: " << get_calificacion() << endl;
+        cout << "Calificacion: " << get_calificacion() << endl;
 }

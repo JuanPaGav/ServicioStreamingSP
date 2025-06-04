@@ -12,12 +12,18 @@ nombre = Dark
 duracion = 300
 genero = suspenso
 calificacion = 9.4
-anio = 2017
 temporadas = 3
+episodios = 2
+titulo = Viajeros
+temporada = 1
+calificacion = 9.0
+titulo = Ciclos
+temporada = 1
+calificacion = 8.8
 
 Pelicula
 id = 3
-nombre = Crods
+nombre = Croods
 duracion = 180
 genero = fantasia
 calificacion = 10.0

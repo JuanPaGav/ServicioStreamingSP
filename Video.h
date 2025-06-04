@@ -14,6 +14,7 @@ private:
 public:
     Video();
     Video(int _id, int _duracion, string _titulo, string _genero, float _calificacion);
+    virtual ~Video();
     int get_id();
     int get_duracion();
     string get_titulo();
