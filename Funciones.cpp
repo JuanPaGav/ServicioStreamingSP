@@ -101,13 +101,13 @@ void mostrarCalificacionPeliculas(float calificacion) {
     }
 
     if (!hayCoincidencias) {
-        cout << "No se encontraron peliculas con calificación " << calificacion << "." << endl;
+        cout << "No se encontraron peliculas con calificacion " << calificacion << "." << endl;
     }
 }
 
 
 //  OP #5 | METODO PARA CALIFICAR UN VIDEO POR NOMBRE   //
-void calificarVideo(string video_calificar){
+void calificarVideo(string video_calificar) {
     bool encontrado = false;
 
     for (Video* v : todosLosVideos) {
@@ -130,18 +130,16 @@ void calificarVideo(string video_calificar){
         if (decide_agregar == "No" || decide_agregar == "no") {
             cout << "Regresando al menu..." << endl;
         } else {
-            // Pregunta si es película o serie para crear un nuevo objeto
-            cout << "Es una Pelicula o una Serie? (p | s): ";
+            cout << "Es una Pelicula o una Serie? (p | s): " << endl;
             char tipo;
             cin >> tipo;
 
-            // Capturar atributos comunes
             int id, duracion;
             string titulo, genero;
             float calificacion;
 
             cout << "Titulo: ";
-            cin.ignore(); // importante para limpiar el salto de línea
+            cin.ignore();
             getline(cin, titulo);
 
             cout << "ID: ";
@@ -157,17 +155,48 @@ void calificarVideo(string video_calificar){
             cin >> calificacion;
 
             if (tipo == 'p') {
-                todosLosVideos.push_back(new Pelicula(2024, id, duracion, titulo, genero, calificacion));
+                int anio;
+                cout << "Anio: ";
+                cin >> anio;
+                todosLosVideos.push_back(new Pelicula(anio, id, duracion, titulo, genero, calificacion));
             } else if (tipo == 's') {
                 int temporadas, num_episodios;
                 cout << "Numero de temporadas: ";
                 cin >> temporadas;
-                cout << "Numero de episodios: ";
-                cin >> num_episodios;
-                todosLosVideos.push_back(new Serie(temporadas, id, duracion, titulo, genero, calificacion, num_episodios, episodios));
+                cout << "Desea agregar episodios ahora? (Si | No): ";
+                string respuesta_epi;
+                cin >> respuesta_epi;
+
+                vector<Episodio> nuevos_episodios;
+                num_episodios = 0;
+
+                if (respuesta_epi == "Si" || respuesta_epi == "si") {
+                    cout << "Cuantos episodios deseas agregar?: ";
+                    cin >> num_episodios;
+                    cin.ignore();
+
+                    for (int i = 0; i < num_episodios; ++i) {
+                        string titulo_ep;
+                        int temporada_ep;
+                        float calificacion_ep;
+
+                        cout << "Titulo: ";
+                        getline(cin, titulo_ep);
+                        cout << "Temporada: ";
+                        cin >> temporada_ep;
+                        cout << "Calificacion: ";
+                        cin >> calificacion_ep;
+                        cin.ignore();
+
+                        nuevos_episodios.emplace_back(titulo_ep, temporada_ep, calificacion_ep);
+                    }
+                }
+
+                todosLosVideos.push_back(new Serie(temporadas, id, duracion, titulo, genero, calificacion, num_episodios, nuevos_episodios));
             }
 
             cout << "Se ha agregado el video al catalogo." << endl;
         }
     }
 }
+

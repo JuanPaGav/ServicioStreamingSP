@@ -7,6 +7,7 @@
 #include "Serie.h"
 #include "Funciones.h"
 #include "Episodio.h"
+#include "exception"
 using namespace std;
 
 
@@ -47,6 +48,7 @@ int main()
             break;
         case 2:
             cout << "Buscando contenido...\n";
+            cout << endl;
             mostrarTodosLosVideos();
             break;
 
@@ -71,7 +73,8 @@ int main()
             break;
 
         case 4:
-            cout << "Ingrese la calificación a buscar (por ejemplo 4.0): ";
+            //  Hace falta añadir quizá película que tengan una calificación cercana a lo que introduzca el usurario.  //
+            cout << "Ingrese la calificacion a buscar (por ejemplo 4.0): " << endl;
             cin >> calificacion;
             mostrarCalificacionPeliculas(calificacion);
             break;
@@ -88,7 +91,7 @@ int main()
             exit(0);
 
         default:
-            cout << "Opción invalida. Intente de nuevo.\n";
+            cout << "Opcion invalida. Intente de nuevo.\n";
         }
     }
     return 0;

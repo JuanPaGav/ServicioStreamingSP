@@ -51,6 +51,7 @@ void Serie::mostrar_info() {
         ep.mostrar_info();
         cout << "-----\n";
     }
+    cout << endl;
 }
 
 void Serie::mostrar_episodiosCalificacion(){
