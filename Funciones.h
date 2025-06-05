@@ -16,5 +16,8 @@ using namespace std;
 extern vector<Video*> todosLosVideos;
 vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo);
 void mostrarTodosLosVideos();
+void calificarVideo(string video_calificar);
+void mostrarCalificacionPeliculas(float calificacion);
+
 
 #endif //FUNCIONES_H

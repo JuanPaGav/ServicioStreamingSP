@@ -2,15 +2,15 @@
 
 Video::Video() {}
 
-Video::Video(int _id, int _duracion, string _nombre, string _genero, float _calificacion) {
+Video::Video(int _id, int _duracion, string _titulo, string _genero, float _calificacion) {
     id = _id;
     duracion = _duracion;
-    nombre = _nombre;
+    titulo = _titulo;
     genero = _genero;
     this->calificacion = _calificacion;
 }
 
-Video::~Video() {}
+Video::~Video(){}
 
 int Video::get_id() {
     return id;
@@ -20,8 +20,8 @@ int Video::get_duracion() {
     return duracion;
 }
 
-string Video::get_nombre() {
-    return nombre;
+string Video::get_titulo() {
+    return titulo;
 }
 
 string Video::get_genero() {
@@ -40,8 +40,8 @@ void Video::set_duracion(int _duracion) {
     duracion = _duracion;
 }
 
-void Video::set_nombre(string _nombre) {
-    nombre = _nombre;
+void Video::set_titulo(string _titulo) {
+    titulo = _titulo;
 }
 
 void Video::set_genero(string _genero) {
