@@ -10,6 +10,8 @@ Video::Video(int _id, int _duracion, string _nombre, string _genero, float _cali
     this->calificacion = _calificacion;
 }
 
+Video::~Video() {}
+
 int Video::get_id() {
     return id;
 }
