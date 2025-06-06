@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <limits>
 #include "Pelicula.h"
 #include "Serie.h"
 #include "Episodio.h"
@@ -28,9 +29,9 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
             float calificacion;
 
             archivo >> etiqueta >> etiqueta >> valor; id = stoi(valor);
-            archivo >> etiqueta >> etiqueta >> nombre;
+            archivo >> etiqueta >> etiqueta; getline(archivo, nombre); nombre = nombre.substr(1);
             archivo >> etiqueta >> etiqueta >> valor; duracion = stoi(valor);
-            archivo >> etiqueta >> etiqueta >> genero;
+            archivo >> etiqueta >> etiqueta; getline(archivo, genero); genero = genero.substr(1);
             archivo >> etiqueta >> etiqueta >> valor; calificacion = stof(valor);
             archivo >> etiqueta >> etiqueta >> valor; anio = stoi(valor);
 
@@ -44,9 +45,8 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
             float calificacion;
 
             archivo >> etiqueta >> etiqueta >> valor; id = stoi(valor);
-            archivo >> etiqueta >> etiqueta >> nombre;
-            archivo >> etiqueta >> etiqueta >> valor; duracion = stoi(valor);
-            archivo >> etiqueta >> etiqueta >> genero;
+            archivo >> etiqueta >> etiqueta; getline(archivo,nombre); nombre = nombre.substr(1);
+            archivo >> etiqueta >> etiqueta; getline(archivo, genero); genero = genero.substr(1);
             archivo >> etiqueta >> etiqueta >> valor; calificacion = stof(valor);
             archivo >> etiqueta >> etiqueta >> valor; temporadas = stoi(valor);
             archivo >> etiqueta >> etiqueta >> valor; numEpisodios = stoi(valor);
@@ -56,7 +56,7 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
                 int temporadaEpi;
                 float calificacionEpi;
 
-                archivo >> etiqueta >> etiqueta >> tituloEpi;
+                archivo >> etiqueta >> etiqueta; getline(archivo, tituloEpi); tituloEpi = tituloEpi.substr(1);
                 archivo >> etiqueta >> etiqueta >> valor; temporadaEpi = stoi(valor);
                 archivo >> etiqueta >> etiqueta >> valor; calificacionEpi = stof(valor);
 
@@ -64,7 +64,7 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
                 episodios.push_back(ep);
             }
 
-            Serie* s = new Serie(temporadas, id, duracion, nombre, genero, calificacion, numEpisodios, episodios);
+            Serie* s = new Serie(temporadas, id, nombre, genero, calificacion, numEpisodios, episodios);
             todosLosVideos.push_back(s);
         }
     }
@@ -93,9 +93,13 @@ void mostrarCalificacionPeliculas(float calificacion) {
     bool hayCoincidencias = false;
 
     for (int i = 0; i < todosLosVideos.size(); i++) {
-        if (todosLosVideos[i]->Peli() && todosLosVideos[i]->get_calificacion() >= calificacion) {
-            todosLosVideos[i]->mostrar_info();
-            hayCoincidencias = true;
+        if (todosLosVideos[i]->Peli())
+        {
+            float calif = todosLosVideos[i]->get_calificacion();
+            if (calif >= (calificacion - 0.5) && calif <= (calificacion + 1.0)) {
+                todosLosVideos[i]->mostrar_info();
+                hayCoincidencias = true;
+            }
         }
     }
 
@@ -106,7 +110,8 @@ void mostrarCalificacionPeliculas(float calificacion) {
 
 
 //  OP #5 | METODO PARA CALIFICAR UN VIDEO POR NOMBRE   //
-void calificarVideo(string video_calificar) {
+void calificarVideo(string video_calificar)
+{
     bool encontrado = false;
 
     for (Video* v : todosLosVideos) {
@@ -114,6 +119,19 @@ void calificarVideo(string video_calificar) {
             float calificacion;
             cout << "Ingresa la calificacion del 1-10:" << endl;
             cin >> calificacion;
+
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error: Entrada invalida. Debe ser un numero." << endl;
+                return;
+            }
+
+            if (calificacion < 1 || calificacion > 10) {
+                cout << "Error: La calificacion debe estar entre 1 y 10." << endl;
+                return;
+            }
+
             v->set_calificacion(calificacion);
             cout << "Se ha actualizado la calificacion." << endl;
             encontrado = true;
@@ -122,16 +140,26 @@ void calificarVideo(string video_calificar) {
     }
 
     if (!encontrado) {
-        cout << "No tenemos ese titulo en nuestro catalogo. Quieres agregarlo? (Si | No)" << endl;
-        string decide_agregar;
-        cin >> decide_agregar;
+        try {
+            cout << "No tenemos ese titulo en nuestro catalogo. Quieres agregarlo? (Si | No)" << endl;
+            string decide_agregar;
+            cin >> decide_agregar;
 
-        if (decide_agregar == "No" || decide_agregar == "no") {
-            cout << "Regresando al menu..." << endl;
-        } else {
+            if (decide_agregar != "Si" && decide_agregar != "si" && decide_agregar != "No" && decide_agregar != "no") {
+                throw invalid_argument("Respuesta invalida. Escribe 'Si' o 'No'.");
+            }
+
+            if (decide_agregar == "No" || decide_agregar == "no") {
+                cout << "Regresando al menu..." << endl;
+                return;
+            }
+
             cout << "Es una Pelicula o una Serie? (p | s): " << endl;
             char tipo;
             cin >> tipo;
+            if (tipo != 'p' && tipo != 's') {
+                throw invalid_argument("Tipo invalido. Escribe 'p' para película o 's' para serie.");
+            }
 
             int id, duracion;
             string titulo, genero;
@@ -140,11 +168,26 @@ void calificarVideo(string video_calificar) {
             cout << "Titulo: ";
             cin.ignore();
             getline(cin, titulo);
+            if (cin.fail()) {
+                cin.clear();
+                throw invalid_argument("Titulo invalido. Debe ser texto.");
+            }
 
             cout << "ID: ";
             cin >> id;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw invalid_argument("ID invalido. Debe ser un numero entero.");
+            }
+
             cout << "Duracion: ";
             cin >> duracion;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw invalid_argument("Duracion invalida. Debe ser un numero entero.");
+            }
             cin.ignore();
 
             cout << "Genero: ";
@@ -152,26 +195,51 @@ void calificarVideo(string video_calificar) {
 
             cout << "Calificacion inicial: ";
             cin >> calificacion;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw invalid_argument("Calificacion invalida. Debe ser un numero.");
+            }
 
             if (tipo == 'p') {
                 int anio;
                 cout << "Anio: ";
                 cin >> anio;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    throw invalid_argument("Anio invalido. Debe ser un numero entero.");
+                }
                 todosLosVideos.push_back(new Pelicula(anio, id, duracion, titulo, genero, calificacion));
             } else if (tipo == 's') {
                 int temporadas, num_episodios;
                 cout << "Numero de temporadas: ";
                 cin >> temporadas;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    throw invalid_argument("Numero de temporadas invalido. Debe ser un numero entero.");
+                }
+
                 cout << "Desea agregar episodios ahora? (Si | No): ";
                 string respuesta_epi;
                 cin >> respuesta_epi;
+                if (cin.fail()) {
+                    cin.clear();
+                    throw invalid_argument("Respuesta invalida. Debe ser texto.");
+                }
 
                 vector<Episodio> nuevos_episodios;
                 num_episodios = 0;
 
                 if (respuesta_epi == "Si" || respuesta_epi == "si") {
-                    cout << "Cuantos episodios deseas agregar?: ";
+                    cout << "Cuantos episodios deseas agregar? ";
                     cin >> num_episodios;
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        throw invalid_argument("Numero de episodios invalido. Debe ser un numero entero.");
+                    }
                     cin.ignore();
 
                     for (int i = 0; i < num_episodios; ++i) {
@@ -181,21 +249,33 @@ void calificarVideo(string video_calificar) {
 
                         cout << "Titulo: ";
                         getline(cin, titulo_ep);
+                        cin.ignore();
+
                         cout << "Temporada: ";
                         cin >> temporada_ep;
+
                         cout << "Calificacion: ";
                         cin >> calificacion_ep;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            throw invalid_argument("Calificacion invalida. Debe ser un numero.");
+                        }
                         cin.ignore();
 
                         nuevos_episodios.emplace_back(titulo_ep, temporada_ep, calificacion_ep);
                     }
                 }
 
-                todosLosVideos.push_back(new Serie(temporadas, id, duracion, titulo, genero, calificacion, num_episodios, nuevos_episodios));
+                todosLosVideos.push_back(new Serie(temporadas, id, titulo, genero, calificacion, num_episodios, nuevos_episodios));
             }
 
             cout << "Se ha agregado el video al catalogo." << endl;
+
+        } catch (invalid_argument& e) {
+            cout << "Error: " << e.what() << endl;
+        } catch (out_of_range& e) {
+            cout << "Error: " << e.what() << endl;
         }
     }
 }
-

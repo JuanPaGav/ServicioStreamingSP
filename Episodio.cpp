@@ -6,7 +6,8 @@
 
 Episodio::Episodio() {}
 
-Episodio::Episodio(string _titulo, int _temporada, float _calificacion){
+Episodio::Episodio(string _titulo, int _temporada, float _calificacion)
+{
     titulo = _titulo;
     temporada = _temporada;
     calificacion = _calificacion;

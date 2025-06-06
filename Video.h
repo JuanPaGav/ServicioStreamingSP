@@ -7,23 +7,21 @@ using namespace std;
 
 class Video {
 private:
-    int id, duracion;
+    int id;
     string titulo, genero;
     float calificacion;
 
 public:
     Video();
-    Video(int _id, int _duracion, string _titulo, string _genero, float _calificacion);
+    Video(int _id, string _titulo, string _genero, float _calificacion);
     virtual ~Video();
     int get_id();
-    int get_duracion();
-    string get_titulo();
-    string get_genero();
-    virtual float get_calificacion();
     void set_id(int _id);
-    void set_duracion(int _duracion);
+    string get_titulo();
     void set_titulo(string _titulo);
+    string get_genero();
     void set_genero(string _genero);
+    virtual float get_calificacion();
     virtual void set_calificacion(float _calificacion);
     virtual void mostrar_info() = 0;
     virtual bool Peli(){ return false;}

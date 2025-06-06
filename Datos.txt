@@ -6,10 +6,25 @@ genero = accion
 calificacion = 8.9
 anio = 2022
 
-Serie
+Pelicula
 id = 2
+nombre = Rio
+duracion = 140
+genero = animacion
+calificacion = 10
+anio = 2011
+
+Pelicula
+id = 3
+nombre = Rio 2
+duracion = 180
+genero = animacion
+calificacion = 9.2
+anio = 2019
+
+Serie
+id = 4
 nombre = Dark
-duracion = 300
 genero = suspenso
 calificacion = 9.4
 temporadas = 3
@@ -22,9 +37,17 @@ temporada = 1
 calificacion = 8.8
 
 Pelicula
-id = 3
-nombre = Croods
+id = 5
+nombre = Crods
 duracion = 180
 genero = fantasia
 calificacion = 10.0
 anio = 2014
+
+Pelicula
+id = 6
+nombre = Karatekid Legends
+duracion = 190
+genero = accion
+calificacion = 7.0
+anio = 2025

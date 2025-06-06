@@ -6,7 +6,7 @@
 
 Pelicula::Pelicula() {}
 
-Pelicula::Pelicula(int _anio, int _id, int _duracion, string _nombre, string _genero, float _calificaion) : Video(_id, _duracion, _nombre, _genero, _calificaion), anio(_anio) {}
+Pelicula::Pelicula(int _anio, int _id, int _duracion, string _nombre, string _genero, float _calificaion) : Video(_id, _nombre, _genero, _calificaion), anio(_anio), duracion(_duracion) {}
 
 int Pelicula::get_anio()
 {
@@ -16,6 +16,16 @@ int Pelicula::get_anio()
 void Pelicula::set_anio(int _anio)
 {
     anio = _anio;
+}
+
+int Pelicula::get_duracion()
+{
+    return duracion;
+}
+
+void Pelicula::set_duracion(int _duracion)
+{
+    duracion = _duracion;
 }
 
 void Pelicula::mostrar_info()
