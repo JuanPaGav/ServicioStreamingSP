@@ -44,7 +44,7 @@ void Episodio::set_calificacion(float _calificacion)
 
 void Episodio::mostrar_info()
 {
-        cout << "Episodio: " << get_titulo() << endl;
-        cout << "Temporada: " << get_temporada() << endl;
-        cout << "Calificacion: " << get_calificacion() << endl;
+    cout << "Episodio: " << get_titulo() << endl;
+    cout << "Temporada: " << get_temporada() << endl;
+    cout << "Calificacion: " << get_calificacion() << endl;
 }

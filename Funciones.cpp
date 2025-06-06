@@ -68,7 +68,6 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
             todosLosVideos.push_back(s);
         }
     }
-
     archivo.close();
     return todosLosVideos;
 }
@@ -94,7 +93,7 @@ void mostrarCalificacionPeliculas(float calificacion) {
     bool hayCoincidencias = false;
 
     for (int i = 0; i < todosLosVideos.size(); i++) {
-        if (todosLosVideos[i]->get_calificacion() == calificacion) {
+        if (todosLosVideos[i]->Peli() && todosLosVideos[i]->get_calificacion() >= calificacion) {
             todosLosVideos[i]->mostrar_info();
             hayCoincidencias = true;
         }

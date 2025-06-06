@@ -20,10 +20,12 @@ void Pelicula::set_anio(int _anio)
 
 void Pelicula::mostrar_info()
 {
-    cout << "Pelicula: " << get_titulo() << endl;
+    cout << "****************************************" << endl;
+    cout << "Tipo: Pelicula" << endl;
+    cout << "Titulo: " << get_titulo() << endl;
     cout << "Duracion: " << get_duracion() << " minutos" << endl;
     cout << "Genero: " << get_genero() << endl;
-    cout << "Ano: " << get_anio() << endl;
+    cout << "Anio: " << get_anio() << endl;
     cout << "Calificacion: " << get_calificacion() << endl;
-    cout << "\n" << endl;
+    cout << "****************************************\n" << endl;
 }

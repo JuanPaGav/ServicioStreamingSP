@@ -26,6 +26,7 @@ public:
     void set_genero(string _genero);
     virtual void set_calificacion(float _calificacion);
     virtual void mostrar_info() = 0;
+    virtual bool Peli(){ return false;}
 };
 
 #endif // VIDEO_H

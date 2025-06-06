@@ -13,6 +13,7 @@ public:
     int get_anio();
     void set_anio(int _anio);
     void mostrar_info() override;
+    bool Peli() override{ return true;}
 };
 
 #endif // PELICULA_H

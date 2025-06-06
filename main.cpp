@@ -14,10 +14,15 @@ using namespace std;
 int main()
 {
     int opcion = -1;
+
+    //  Declaración de algunas variables.   //
     string nombreArchivo, video_calificar, _titulo;
     float calificacion;
 
+    //  Se inicializa un vector del tipo Episodios. //
     vector<Episodio> ep_serie1;
+
+    //  Se intstancia
     ep_serie1.emplace_back("Metamorfosis", 1, 8.2); //Se usa emplace_back porque el objeto se crea directamente en el vector
     ep_serie1.emplace_back("Fiesta en la piscina", 1, 9.0);
     ep_serie1.emplace_back("Pesca del dia", 1, 9.5);
@@ -27,12 +32,14 @@ int main()
     todosLosVideos.push_back(Serie1);
 
     while (opcion != 0) {
+
+        //  Se despliega el menú principal del programa.  //
         cout << "\n--- MENU DE OPCIONES ---\n";
         cout << "1. Cargar archivo de datos\n"; //  Listo
         cout << "2. Mostrar videos\n"; //  Listo
         cout << "3. Mostrar episodios de una serie con calificacion\n"; //  En proceso...
         cout << "4. Mostrar peliculas con cierta calificacion\n";   // Listo
-        cout << "5. Calificar un video\n";  //  En proceso...
+        cout << "5. Calificar un video\n";  //  Listo
         cout << "0. Salir\n";   //  Listo
         cout << "Ingrese una opcion: \n";
         cin >> opcion;
@@ -54,27 +61,47 @@ int main()
 
         case 3:
             // mostrar_episodiosCalificacion();
-            cout << "¿Que serie quieres ver?" << endl;
-            getline(cin, _titulo);
-            if (todosLosVideos.empty()){
-                cout<<"No hay contenido..."<<endl;
-            }
-            for (Video* v : todosLosVideos) {
-                if (v->get_titulo() == _titulo) {
-                    // Intentar convertir v a Serie*
-                    Serie* s = dynamic_cast<Serie*>(v);
-                    if (s != nullptr) {
-                        s->mostrar_episodiosCalificacion();
-                    } else {
-                        cout << "Ese título no corresponde a una serie con episodios." << endl;
+            try {
+                cout << "Que serie quieres ver?" << endl;
+                cin.ignore();
+                getline(cin, _titulo);
+                if (_titulo.empty()) {
+                    //runtime_error se usa cuando: entrada inválida, no se encuentra un dato, fallas lógicas
+                    throw runtime_error("El titulo no puede estar vacio.");
+                }
+
+                if (todosLosVideos.empty()) {
+                    throw runtime_error("No hay contenido en el catalogo.");
+                }
+
+                bool encontrado = false;
+
+                for (Video* v : todosLosVideos) {
+                    if (v->get_titulo() == _titulo) {
+                        encontrado = true;
+                        Serie* s = dynamic_cast<Serie*>(v);
+                        if (s != nullptr) {
+                            s->mostrar_episodiosCalificacion();
+                        } else {
+                            throw runtime_error("Ese titulo no corresponde a una serie con episodios.");
+                        }
                     }
                 }
+
+                if (!encontrado) {
+                    throw runtime_error("No se encontro ninguna serie con ese titulo.");
+                }
+            }
+            catch (const exception& e)
+            {
+                cerr << "Error: " << e.what() << endl;
             }
             break;
 
         case 4:
+            float calificacion;
             //  Hace falta añadir quizá película que tengan una calificación cercana a lo que introduzca el usurario.  //
-            cout << "Ingrese la calificacion a buscar (por ejemplo 4.0): " << endl;
+            cout << "Ingrese la calificacion a buscar (por ejemplo 4.5): " << endl;
             cin >> calificacion;
             mostrarCalificacionPeliculas(calificacion);
             break;
