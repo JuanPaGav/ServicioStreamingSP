@@ -1,3 +1,0 @@
-C:/Users/jpgav/OneDrive/Documentos/2do Semestre/Programación Orienteada a Objetos/ServicioStreamingSP/cmake-build-debug/CMakeFiles/ServicioStreamingSP.dir
-C:/Users/jpgav/OneDrive/Documentos/2do Semestre/Programación Orienteada a Objetos/ServicioStreamingSP/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/jpgav/OneDrive/Documentos/2do Semestre/Programación Orienteada a Objetos/ServicioStreamingSP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
