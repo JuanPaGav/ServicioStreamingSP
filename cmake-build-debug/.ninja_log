@@ -24,3 +24,13 @@
 8	760	7709588618280360	CMakeFiles/ServicioStreamingSP.dir/main.cpp.obj	591fc1415892616c
 35	830	7709588618550350	CMakeFiles/ServicioStreamingSP.dir/Funciones.cpp.obj	d0b1b2d674399509
 830	1020	7709588626501070	ServicioStreamingSP.exe	26c543d5e1c210b5
+22	855	7709592707510368	CMakeFiles/ServicioStreamingSP.dir/Video.cpp.obj	a8a493966436c5e9
+45	940	7709592707740447	CMakeFiles/ServicioStreamingSP.dir/Pelicula.cpp.obj	6f43ff786942f3e0
+34	963	7709592707630443	CMakeFiles/ServicioStreamingSP.dir/Serie.cpp.obj	ec8fc6ebc41347d6
+11	1003	7709592707410451	CMakeFiles/ServicioStreamingSP.dir/main.cpp.obj	591fc1415892616c
+24	690	7709593750814473	CMakeFiles/ServicioStreamingSP.dir/Video.cpp.obj	a8a493966436c5e9
+60	770	7709593751169664	CMakeFiles/ServicioStreamingSP.dir/Pelicula.cpp.obj	6f43ff786942f3e0
+39	774	7709593750964549	CMakeFiles/ServicioStreamingSP.dir/Serie.cpp.obj	ec8fc6ebc41347d6
+7	1091	7709593750644479	CMakeFiles/ServicioStreamingSP.dir/main.cpp.obj	591fc1415892616c
+113	1093	7709593751699668	CMakeFiles/ServicioStreamingSP.dir/Funciones.cpp.obj	d0b1b2d674399509
+1093	1279	7709593761499400	ServicioStreamingSP.exe	26c543d5e1c210b5
