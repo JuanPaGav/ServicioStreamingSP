@@ -32,8 +32,8 @@ int main()
     todosLosVideos.push_back(Serie1);
 
     try {
-        while (opcion != 0) {
-
+        while (opcion != 0)
+        {
             //  Se despliega el menú principal del programa.
             cout << "\n--- MENU DE OPCIONES ---\n";
             cout << "1. Cargar archivo de datos\n";
@@ -43,7 +43,7 @@ int main()
             cout << "5. Calificar un video\n";
             cout << "0. Salir\n";
             cout << "Ingrese una opcion: \n";
-            cin >> opcionStr;
+            getline(cin, opcionStr);
 
             try { // Convierte entraga de string a int con manejo de errores
                 opcion = stoi(opcionStr); // Puede lanzar exception si no es un número

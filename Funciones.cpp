@@ -92,29 +92,31 @@ void mostrarTodosLosVideos()
         cout<<"No hay contenido..."<<endl;
         return;
     }
-    for (Video* v: todosLosVideos)
+    for (Video* v: todosLosVideos) // Recorre vector global donde está el catálogo
     {
-        v->mostrar_info();
+       cout<< *v <<endl; // Usamos polimorfismo usando sobrecarga de operador
+        // Se imprime de diferente modo según su tipo
     }
 }
 
 
 // OP #4 | METODO PARA MOSTRAR PALICULAS POR CALIFICACION   //
 void mostrarCalificacionPeliculas(float calificacion) {
-    bool hayCoincidencias = false;
+    bool hayCoincidencias = false; // Variable para saber si se encontraron películas en el rango de calificación
 
-    for (int i = 0; i < todosLosVideos.size(); i++) {
-        if (todosLosVideos[i]->Peli())
+    for (int i = 0; i < todosLosVideos.size(); i++) { // Recorre vector global
+        if (todosLosVideos[i]->Peli()) // Verifica si el objeto actual es de tipo película
         {
-            float calif = todosLosVideos[i]->get_calificacion();
+            float calif = todosLosVideos[i]->get_calificacion(); // Obtiene su calificación
+            // Compara si la calificación está dentro de cierto rango, de acuerdo a lo que quiere el usuario
             if (calif >= (calificacion - 0.5) && calif <= (calificacion + 1.0)) {
                 todosLosVideos[i]->mostrar_info();
-                hayCoincidencias = true;
+                hayCoincidencias = true; // Marca que sí hubo coincidencias
             }
         }
     }
 
-    if (!hayCoincidencias) {
+    if (!hayCoincidencias) { // Si no se encontraron coincidencias
         cout << "No se encontraron peliculas con calificacion " << calificacion << "." << endl;
     }
 }
@@ -123,121 +125,136 @@ void mostrarCalificacionPeliculas(float calificacion) {
 //  OP #5 | METODO PARA CALIFICAR UN VIDEO POR NOMBRE   //
 void calificarVideo(string video_calificar)
 {
-    bool encontrado = false;
+    bool encontrado = false; // Variable para saber si el video fue encontrado
 
     for (Video* v : todosLosVideos) {
-        if (v->get_titulo() == video_calificar) {
+        if (v->get_titulo() == video_calificar) { // Busca el video por título
             float calificacion;
             cout << "Ingresa la calificacion del 1-10:" << endl;
-            cin >> calificacion;
+            cin >> calificacion; // Pide la calificación a aplicar
 
-            if (cin.fail()) {
-                cin.clear();
+            if (cin.fail()) { // Verifica que el usuario haya ingresado un número
+                cin.clear(); // Limpia error de entrada
+
+                // Descarta toda la línea de entrada hasta encontrar un salto de línea (\n).
+                //Evita que basura (entrada inválida) se quede en el buffer de entrada
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 cout << "Error: Entrada invalida. Debe ser un numero." << endl;
                 return;
             }
 
-            if (calificacion < 1 || calificacion > 10) {
+            if (calificacion < 1 || calificacion > 10) { // Valida que el usuario haya ingresado un número en el rango válido
                 cout << "Error: La calificacion debe estar entre 1 y 10." << endl;
                 return;
             }
 
-            v->set_calificacion(calificacion);
+            v->set_calificacion(calificacion); // Asigna la nueva calificación
             cout << "Se ha actualizado la calificacion." << endl;
             encontrado = true;
             break;
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado) { // Si el video no fue encontrado en el catálogo
         try {
+            // Pregunta si quiere agregarlo
             cout << "No tenemos ese titulo en nuestro catalogo. Quieres agregarlo? (Si | No)" << endl;
             string decide_agregar;
             cin >> decide_agregar;
 
             if (decide_agregar != "Si" && decide_agregar != "si" && decide_agregar != "No" && decide_agregar != "no") {
+                // Valida la respuesta del usuario
                 throw invalid_argument("Respuesta invalida. Escribe 'Si' o 'No'.");
+
             }
 
-            if (decide_agregar == "No" || decide_agregar == "no") {
+            if (decide_agregar == "No" || decide_agregar == "no") { // Termina la función si no quiere agregarlo
                 cout << "Regresando al menu..." << endl;
                 return;
             }
 
-            cout << "Es una Pelicula o una Serie? (p | s): " << endl;
+            cout << "Es una Pelicula o una Serie? (p | s): " << endl; // Pregunta por el tipo de video
             char tipo;
             cin >> tipo;
             if (tipo != 'p' && tipo != 's') {
+                // Valida la respuesta del usuario
                 throw invalid_argument("Tipo invalido. Escribe 'p' para película o 's' para serie.");
             }
 
-            int id, duracion;
+            // Inicializa atributos comúnes de la clase base
+            int id;
             string titulo, genero;
             float calificacion;
 
             cout << "Titulo: ";
             cin.ignore();
-            getline(cin, titulo);
-            if (cin.fail()) {
+            getline(cin, titulo); // Usa getline para capturar un título con más de una palabra
+            if (cin.fail()) { // Valida la respuesta del usuario
                 cin.clear();
                 throw invalid_argument("Titulo invalido. Debe ser texto.");
             }
 
             cout << "ID: ";
-            cin >> id;
-            if (cin.fail()) {
+            cin >> id; // Pide el ID
+            if (cin.fail()) { // Valida la respuesta del usuario
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw invalid_argument("ID invalido. Debe ser un numero entero.");
             }
 
-            cout << "Duracion: ";
-            cin >> duracion;
-            if (cin.fail()) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                throw invalid_argument("Duracion invalida. Debe ser un numero entero.");
-            }
-            cin.ignore();
 
-            cout << "Genero: ";
+            cout << "Genero: "; // Pide el género
             getline(cin, genero);
 
-            cout << "Calificacion inicial: ";
+            cout << "Calificacion inicial: "; // Pide la calificación
             cin >> calificacion;
-            if (cin.fail()) {
+            if (cin.fail()) { // Valida la respuesta del usuario
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw invalid_argument("Calificacion invalida. Debe ser un numero.");
             }
 
-            if (tipo == 'p') {
+            // Verifica cuál es el tipo de video que se quiere agregar
+            if (tipo == 'p') { // Si es película
+                int duracion;
+                cout << "Duracion: "; // Pide la duración
+                cin >> duracion;
+                if (cin.fail()) { // Valida la respuesta del usuario
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    throw invalid_argument("Duracion invalida. Debe ser un numero entero.");
+                }
+                cin.ignore();
+
                 int anio;
-                cout << "Anio: ";
+                cout << "Anio: "; // Pide el año
                 cin >> anio;
-                if (cin.fail()) {
+                if (cin.fail()) { // Valida la respuesta del usuario
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     throw invalid_argument("Anio invalido. Debe ser un numero entero.");
                 }
+
+                // Agrega el apuntador al nuevo objeto en memoria dinámica al vector global
                 todosLosVideos.push_back(new Pelicula(anio, id, duracion, titulo, genero, calificacion));
 
             } else if (tipo == 's') { // Si es una serie
                 vector<Episodio> episodios;
                 int temporadas, num_episodios;
-                cout << "Numero de temporadas: ";
+
+                cout << "Numero de temporadas: "; // Pide las temporadas
                 cin >> temporadas;
-                if (cin.fail()) {
+                if (cin.fail()) { // Valida la respuesta del usuario
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     throw invalid_argument("Numero de temporadas invalido. Debe ser un numero entero.");
                 }
 
-                cout << "Desea agregar episodios ahora? (Si | No): ";
+                cout << "Desea agregar episodios ahora? (Si | No): "; // Pregunta si se desean agregar episodios
                 string respuesta_epi;
                 cin >> respuesta_epi;
-                if (cin.fail()) {
+                if (cin.fail()) { // Valida la respuesta del usuario
                     cin.clear();
                     throw invalid_argument("Respuesta invalida. Debe ser texto.");
                 }
@@ -245,10 +262,10 @@ void calificarVideo(string video_calificar)
                 vector<Episodio> nuevos_episodios;
                 num_episodios = 0;
 
-                if (respuesta_epi == "Si" || respuesta_epi == "si") {
-                    cout << "Cuantos episodios deseas agregar? ";
+                if (respuesta_epi == "Si" || respuesta_epi == "si") { // Si se desean agregar episodios
+                    cout << "Cuantos episodios deseas agregar? "; // Pide el numero de episodios
                     cin >> num_episodios;
-                    if (cin.fail()) {
+                    if (cin.fail()) { // Valida la respuesta del usuario
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         throw invalid_argument("Numero de episodios invalido. Debe ser un numero entero.");
@@ -260,32 +277,35 @@ void calificarVideo(string video_calificar)
                         int temporada_ep;
                         float calificacion_ep;
 
-                        cout << "Titulo: ";
+                        cout << "Titulo: "; // Pide titulo del episodios
                         getline(cin, titulo_ep);
                         cin.ignore();
 
-                        cout << "Temporada: ";
+                        cout << "Temporada: "; // Pide la temporada en la que está el episodio
                         cin >> temporada_ep;
 
                         cout << "Calificacion: ";
                         cin >> calificacion_ep;
-                        if (cin.fail()) {
+                        if (cin.fail()) { // Valida la respuesta del usuario
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             throw invalid_argument("Calificacion invalida. Debe ser un numero.");
                         }
                         cin.ignore();
 
+                        // Usa memoria automática y crea un objeto dentro del vector
                         nuevos_episodios.emplace_back(titulo_ep, temporada_ep, calificacion_ep);
                     }
                 }
 
+                // Agrega el apuntador al nuevo objeto en memoria dinámica al vector global
                 todosLosVideos.push_back(new Serie(temporadas, id, titulo, genero, calificacion, num_episodios, nuevos_episodios));
             }
 
             cout << "Se ha agregado el video al catalogo." << endl;
 
-        } catch (invalid_argument& e) {
+        // Captura de excepciones si usuario proporciona datos inválidos
+        } catch (invalid_argument& e) { // Si se escribió mal algo o se ingresó un tipo de dato no válido
             cout << "Error: " << e.what() << endl;
 
         } catch (...) {
