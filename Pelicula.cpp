@@ -1,26 +1,14 @@
-//
-// Created by jpgav on 27/05/2025.
-//
-
 #include "Pelicula.h"
 
-Pelicula::Pelicula() {}
+// Constructores
+Pelicula::Pelicula(): anio(0), duracion(0) {}
 
-Pelicula::Pelicula(int _anio, int _id, int _duracion, string _nombre, string _genero, float _calificaion) : Video(_id, _nombre, _genero, _calificaion), anio(_anio), duracion(_duracion) {}
+Pelicula::Pelicula(int _anio, int _id, int _duracion, string _titulo, string _genero, float _calificaion) : Video(_id, _titulo, _genero, _calificaion), anio(_anio), duracion(_duracion) {}
 
-int Pelicula::get_anio()
-{
-    return anio;
-}
-
+// Setters
 void Pelicula::set_anio(int _anio)
 {
     anio = _anio;
-}
-
-int Pelicula::get_duracion()
-{
-    return duracion;
 }
 
 void Pelicula::set_duracion(int _duracion)
@@ -28,8 +16,21 @@ void Pelicula::set_duracion(int _duracion)
     duracion = _duracion;
 }
 
-void Pelicula::mostrar_info()
+// Getters
+int Pelicula::get_anio() const
 {
+    return anio;
+}
+
+int Pelicula::get_duracion() const
+{
+    return duracion;
+}
+
+// Metodo sobreescrito para mostrar información
+void Pelicula::mostrar_info() const
+{
+    // Se accede a cada atributo usando getters propios de la clase y heredados de Video
     cout << "****************************************" << endl;
     cout << "Tipo: Pelicula" << endl;
     cout << "Titulo: " << get_titulo() << endl;

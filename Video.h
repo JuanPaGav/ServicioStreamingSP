@@ -21,9 +21,9 @@ public:
     virtual ~Video();
 
     // Getters
-    int get_id();
-    string get_titulo();
-    string get_genero();
+    int get_id() const;
+    string get_titulo() const;
+    string get_genero() const;
 
     // Setters
     void set_id(int _id);
@@ -31,13 +31,16 @@ public:
     void set_genero(string _genero);
 
     // Metodos virtuales que las derivadas pueden sobreescribir
-    virtual float get_calificacion();
+    virtual float get_calificacion() const;
     virtual void set_calificacion(float _calificacion);
     virtual bool Peli(){return false;}
 
     // Method virtual puro, no se implementa en clase base
     // Obliga a las derivadas a implementarlo
-    virtual void mostrar_info() = 0;
+    virtual void mostrar_info() const = 0;
+
+    // Sobrecarga de operador "<<"
+    friend ostream& operator<<(ostream& os, const Video& v);
 
 };
 

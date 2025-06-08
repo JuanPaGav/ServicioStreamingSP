@@ -15,37 +15,38 @@ int main()
 {
     int opcion = -1;
 
-    //  Declaración de algunas variables.   //
+    //  Declaración de algunas variables.
     string nombreArchivo, video_calificar, _titulo, _input, opcionStr;
     float calificacion;
 
-    //  Se inicializa un vector del tipo Episodios. //
+    //  Se inicializa un vector del tipo Episodios.
     vector<Episodio> ep_serie1;
 
-    //  Se intstancia
+    //  Se intstancian episodios para una serie default
     ep_serie1.emplace_back("Metamorfosis", 1, 8.2); //Se usa emplace_back porque el objeto se crea directamente en el vector
     ep_serie1.emplace_back("Fiesta en la piscina", 1, 9.0);
     ep_serie1.emplace_back("Pesca del dia", 1, 9.5);
 
+    // Crea dinámicamente una serie y la guarda en el vector global
     Serie* Serie1 = new Serie(1, 7, "H2O sirenas del mar", "drama", 9.5,3, ep_serie1);
-
     todosLosVideos.push_back(Serie1);
+
     try {
         while (opcion != 0) {
 
-            //  Se despliega el menú principal del programa.  //
+            //  Se despliega el menú principal del programa.
             cout << "\n--- MENU DE OPCIONES ---\n";
-            cout << "1. Cargar archivo de datos\n"; //  Listo
-            cout << "2. Mostrar videos\n"; //  Listo
-            cout << "3. Mostrar episodios de una serie con calificacion\n"; //  En proceso...
-            cout << "4. Mostrar peliculas con cierta calificacion\n";   // Listo
-            cout << "5. Calificar un video\n";  //  Listo
-            cout << "0. Salir\n";   //  Listo
+            cout << "1. Cargar archivo de datos\n";
+            cout << "2. Mostrar videos\n";
+            cout << "3. Mostrar episodios de una serie con calificacion\n";
+            cout << "4. Mostrar peliculas con cierta calificacion\n";
+            cout << "5. Calificar un video\n";
+            cout << "0. Salir\n";
             cout << "Ingrese una opcion: \n";
             cin >> opcionStr;
 
-            try {
-                opcion = stoi(opcionStr);
+            try { // Convierte entraga de string a int con manejo de errores
+                opcion = stoi(opcionStr); // Puede lanzar exception si no es un número
             } catch (invalid_argument&) {
                 cout << "Error: Entrada invalida. Debe ingresar un numero.\n";
                 continue;
@@ -54,11 +55,10 @@ int main()
                 continue;
             }
 
-
             switch(opcion)
             {
             case 1:
-                //  Opción de lectura de datos y construcción de objetos.   //
+                //  Opción de lectura de datos y construcción de objetos.
                     nombreArchivo = "../Datos.txt";
                 cout << "Cargando archivo desde '" << nombreArchivo << "'...\n";
                 leerVideosDesdeArchivos(nombreArchivo);
@@ -66,7 +66,7 @@ int main()
                 cout << "\n" << endl;
                 break;
             case 2:
-                //  Opción impresión de catálogo de videos.   /
+                //  Opción impresión de catálogo de videos. Muestra el contenido
                     cout << "Buscando contenido...\n";
                 cout << endl;
                 mostrarTodosLosVideos();
@@ -76,7 +76,7 @@ int main()
                 // Opción para mostrar los episodios de una serie, con su calificación. //
                     try {
                         cout << "Que serie quieres ver?" << endl;
-                        cin.ignore();
+                        cin.ignore(); // Limpia el buffer para evitar errores con getline
                         getline(cin, _titulo);
                         if (_titulo.empty()) {
                             //runtime_error se usa cuando: entrada inválida, no se encuentra un dato, fallas lógicas
@@ -92,7 +92,7 @@ int main()
                         for (Video* v : todosLosVideos) {
                             if (v->get_titulo() == _titulo) {
                                 encontrado = true;
-                                Serie* s = dynamic_cast<Serie*>(v);
+                                Serie* s = dynamic_cast<Serie*>(v); // Down
                                 if (s != nullptr) {
                                     s->mostrar_episodiosCalificacion();
                                 } else {
