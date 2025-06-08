@@ -8,50 +8,59 @@
 #include "Episodio.h"
 using namespace std;
 
-vector<Video*> todosLosVideos;  // Vector global
-vector<Episodio> episodios; // Vector global
+vector<Video*> todosLosVideos;  // Se instancía el vector global (solo aquí)
+// Esto permite polimorfismo, ya que se almacenan Pelicula* y Serie* en un solo vector de Video*.
 
 //  OP #1 | METODO DE LECTURA Y CONSTRUCCION DE OBJETOS //
 vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
 {
+    // // Abre el archivo en modo lectura
     ifstream archivo(nombreArchivo);
-    if (!archivo.is_open()) {
+    if (!archivo.is_open()) { // Si falla la apertura, muestra error y retorna lo que haya en todosLosVideos
         cout << "No se pudo abrir el archivo: " << nombreArchivo << endl;
         return todosLosVideos;
     }
 
-    string tipoVideo, etiqueta, valor;
+    string tipoVideo, etiqueta, valor; // Variables auxiliares para lectura
 
-    while (archivo >> tipoVideo) {
+    while (archivo >> tipoVideo) { // Mientras haya tipo de video que leer
         if (tipoVideo == "Pelicula") {
+            // Variables para construir objeto Pelicula
             string nombre, genero;
             int id, duracion, anio;
             float calificacion;
 
+            // Lee los datos según el formato del archivo, y los convierte al tipo de dato aceptado por el constructor
             archivo >> etiqueta >> etiqueta >> valor; id = stoi(valor);
-            archivo >> etiqueta >> etiqueta; getline(archivo, nombre); nombre = nombre.substr(1);
+            archivo >> etiqueta >> etiqueta; getline(archivo, nombre); nombre = nombre.substr(1); // Quita primer espacio
             archivo >> etiqueta >> etiqueta >> valor; duracion = stoi(valor);
             archivo >> etiqueta >> etiqueta; getline(archivo, genero); genero = genero.substr(1);
             archivo >> etiqueta >> etiqueta >> valor; calificacion = stof(valor);
             archivo >> etiqueta >> etiqueta >> valor; anio = stoi(valor);
 
+            // Crea nueva película y la agrega al vector global
+            // Usando pointer esta se guarda hasta que se destruya con delete
             Pelicula* p = new Pelicula(anio, id, duracion, nombre, genero, calificacion);
             todosLosVideos.push_back(p);
         }
 
         else if (tipoVideo == "Serie") {
-            int id, duracion, temporadas, numEpisodios;
+            // Variables para construir objeto Serie
+            vector<Episodio> episodios;
+            int id, temporadas, numEpisodios;
             string nombre, genero;
             float calificacion;
 
+            // Lee datos generales de la serie
             archivo >> etiqueta >> etiqueta >> valor; id = stoi(valor);
-            archivo >> etiqueta >> etiqueta; getline(archivo,nombre); nombre = nombre.substr(1);
+            archivo >> etiqueta >> etiqueta; getline(archivo,nombre); nombre = nombre.substr(1); // Quita primer espacio
             archivo >> etiqueta >> etiqueta; getline(archivo, genero); genero = genero.substr(1);
             archivo >> etiqueta >> etiqueta >> valor; calificacion = stof(valor);
             archivo >> etiqueta >> etiqueta >> valor; temporadas = stoi(valor);
             archivo >> etiqueta >> etiqueta >> valor; numEpisodios = stoi(valor);
 
             for (int i = 0; i < numEpisodios; ++i) {
+                // Datos de cada episodio
                 string tituloEpi;
                 int temporadaEpi;
                 float calificacionEpi;
@@ -60,15 +69,17 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
                 archivo >> etiqueta >> etiqueta >> valor; temporadaEpi = stoi(valor);
                 archivo >> etiqueta >> etiqueta >> valor; calificacionEpi = stof(valor);
 
+                // Agrega episodio al vector
                 Episodio ep(tituloEpi, temporadaEpi, calificacionEpi);
                 episodios.push_back(ep);
             }
 
+            // Crea serie con todos sus episodios y la agrega al vector global
             Serie* s = new Serie(temporadas, id, nombre, genero, calificacion, numEpisodios, episodios);
             todosLosVideos.push_back(s);
         }
     }
-    archivo.close();
+    archivo.close(); // Cierra
     return todosLosVideos;
 }
 
@@ -76,7 +87,7 @@ vector<Video*> leerVideosDesdeArchivos(const string& nombreArchivo)
 //  OP #2 | METODO PARA ACCEDER A LA INFROMACION DE CADA OBJETO DEL VECTOR VIDEOS  //
 void mostrarTodosLosVideos()
 {
-    if (todosLosVideos.empty())
+    if (todosLosVideos.empty()) // Si no hay video
     {
         cout<<"No hay contenido..."<<endl;
         return;
@@ -211,7 +222,9 @@ void calificarVideo(string video_calificar)
                     throw invalid_argument("Anio invalido. Debe ser un numero entero.");
                 }
                 todosLosVideos.push_back(new Pelicula(anio, id, duracion, titulo, genero, calificacion));
-            } else if (tipo == 's') {
+
+            } else if (tipo == 's') { // Si es una serie
+                vector<Episodio> episodios;
                 int temporadas, num_episodios;
                 cout << "Numero de temporadas: ";
                 cin >> temporadas;
@@ -274,8 +287,9 @@ void calificarVideo(string video_calificar)
 
         } catch (invalid_argument& e) {
             cout << "Error: " << e.what() << endl;
-        } catch (out_of_range& e) {
-            cout << "Error: " << e.what() << endl;
+
+        } catch (...) {
+            cout << "Error desconocido." << endl;
         }
     }
 }

@@ -18,12 +18,12 @@ string Episodio::get_titulo()
     return titulo;
 }
 
-int Episodio::get_temporada()
+int Episodio::get_temporada() const
 {
     return temporada;
 }
 
-float Episodio::get_calificacion()
+float Episodio::get_calificacion() const
 {
     return calificacion;
 }
